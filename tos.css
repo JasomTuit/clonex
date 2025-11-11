@@ -1,0 +1,193 @@
+* {
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0f1c 0%, #1a2332 50%, #0d1421 100%);
+            background-attachment: fixed;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(13, 71, 161, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(30, 136, 229, 0.5), transparent);
+        }
+
+        .navbar-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 80px;
+            background: rgba(13, 71, 161, 0.1);
+        }
+
+        .logo img {
+            height: 7vh;
+            width: 7vh;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #42a5f5;
+        }
+
+        .tos-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tos-header h1 {
+            font-size: 48px;
+            background: linear-gradient(135deg, #1e88e5, #42a5f5, #64b5f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .tos-header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .tos-content {
+            line-height: 1.8;
+        }
+
+        .tos-content h2 {
+            color: #42a5f5;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .tos-content h3 {
+            color: #64b5f6;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .tos-content p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-align: justify;
+        }
+
+        .tos-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .tos-content ul li {
+            margin-bottom: 8px;
+        }
+
+        .warning-box {
+            background: rgba(255, 152, 0, 0.1);
+            border: 1px solid rgba(255, 152, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning-box h3 {
+            color: #ffa726;
+            margin-top: 0;
+        }
+
+        .info-box {
+            background: rgba(33, 150, 243, 0.1);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-box h3 {
+            color: #42a5f5;
+            margin-top: 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #1976d2, #2196f3);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(25, 118, 210, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-card {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .tos-header h1 {
+                font-size: 32px;
+            }
+
+            .tos-content p {
+                text-align: left;
+            }
+        }

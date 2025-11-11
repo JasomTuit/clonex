@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="cz">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <title>Clone X</title>
+    </head>
+    <body>
+        <div class="floating-elements">
+            <div class="floating-circle"></div>
+            <div class="floating-circle"></div>
+            <div class="floating-circle"></div>
+        </div>
+
+        <div class="container">
+            <div class="glass-card navbar-card">
+                <div class="logo"><img src="img/logo.png"></div>
+                <ul class="nav-links">
+                    <li><a href="#home">Domov</a></li>
+                    <li><a href="#about">O nás</a></li>
+                    <li><a href="#store">Obchod</a></li>
+                    <li><a href="cart.html">Košík (<span id="cart-count">0</span>)</a></li>
+                </ul>
+                <a href="tos.html"><button class="terms-button">Podmínky</button></a>
+            </div>
+
+            <div class="glass-card hero-card" id="home">
+                <div class="hero-title">CLONE X</div>
+                <div class="hero-slogan">S námi to neznamená konec</div>
+                <button class="cta-button">
+                    <a href="#store">Koupit teď</a>
+                </button>
+            </div>
+
+            <div class="glass-card about-card" id="about">
+                <h2>O nás</h2>
+                <p>Ve společnosti CloneX se zabýváme vytvářením lidí za pomoci jejich odebrané DNA. Klientům odebereme vzorek, z nějž izolujeme genetickou informaci, a tuto informaci poté vložíme do upraveného vajíčka, které je bez DNA. Takto vzniklé embryo se dále vyvijí v kontrolovaném prostředí a po vybrané době bude zralé. Klon může být užitečný pro lékařské účely. Klon zaručuje etiku, souhlas a samostatnost každého klonovaného jedince.</p>
+            </div>
+
+            <div class="glass-card plan-card" id="store">
+                <div>
+                    <div class="plan-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640" fill="white">
+                            <path d="M160 144C190.9 144 216 118.9 216 88C216 57.1 190.9 32 160 32C129.1 32 104 57.1 104 88C104 118.9 129.1 144 160 144zM73.4 291.9L96 269.3L96 338.6C96 366.6 108.2 393.3 129.5 411.5L200.9 472.7C206.8 477.8 210.7 484.8 211.8 492.5L224.4 580.6C226.9 598.1 243.1 610.3 260.6 607.8C278.1 605.3 290.3 589.1 287.8 571.6L275.2 483.5C271.9 460.4 260.3 439.4 242.6 424.2L208.1 394.6L208.1 279.4L211.9 284.1C230.1 306.9 257.7 320.1 286.9 320.1L320.1 320.1C337.8 320.1 352.1 305.8 352.1 288.1C352.1 270.4 337.8 256.1 320.1 256.1L286.9 256.1C277.2 256.1 268 251.7 261.9 244.1L244 221.7C221 192.9 186.1 176.1 149.2 176.1C117 176.1 86.1 188.9 63.4 211.7L28.1 246.6C10.1 264.6 0 289 0 314.5L0 352C0 369.7 14.3 384 32 384C49.7 384 64 369.7 64 352L64 314.5C64 306 67.4 297.9 73.4 291.9zM609 337C618.4 327.6 618.4 312.4 609 303.1L537 231.1C527.6 221.7 512.4 221.7 503.1 231.1C493.8 240.5 493.7 255.7 503.1 265L534.1 296L432 296C418.7 296 408 306.7 408 320C408 333.3 418.7 344 432 344L534.1 344L503.1 375C493.7 384.4 493.7 399.6 503.1 408.9C512.5 418.2 527.7 418.3 537 408.9L609 336.9z"/>
+                        </svg>
+                    </div>
+                    <h3>Plán Origin</h3>
+                    <p>Doba dodání klonu je 9 měsíců. Tento plán je vhodný pro dlouhodobé projekty, kde není časový tlak.</p>
+                    <p>Cena Odběru DNA stojí 19 990 Kč</p>
+                    <p>Dodání do 9. měsíců</p>
+                </div>
+                <button class="plan-button" onclick="addToCart('Plán Origin', 499990)">Koupit - 499 990 Kč</button>
+            </div>
+
+            <div class="glass-card plan-card">
+                <div>
+                    <div class="plan-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640" fill="white">
+                            <path d="M160 144C190.9 144 216 118.9 216 88C216 57.1 190.9 32 160 32C129.1 32 104 57.1 104 88C104 118.9 129.1 144 160 144zM73.4 291.9L96 269.3L96 338.6C96 366.6 108.2 393.3 129.5 411.5L200.9 472.7C206.8 477.8 210.7 484.8 211.8 492.5L224.4 580.6C226.9 598.1 243.1 610.3 260.6 607.8C278.1 605.3 290.3 589.1 287.8 571.6L275.2 483.5C271.9 460.4 260.3 439.4 242.6 424.2L208.1 394.6L208.1 279.4L211.9 284.1C230.1 306.9 257.7 320.1 286.9 320.1L320.1 320.1C337.8 320.1 352.1 305.8 352.1 288.1C352.1 270.4 337.8 256.1 320.1 256.1L286.9 256.1C277.2 256.1 268 251.7 261.9 244.1L244 221.7C221 192.9 186.1 176.1 149.2 176.1C117 176.1 86.1 188.9 63.4 211.7L28.1 246.6C10.1 264.6 0 289 0 314.5L0 352C0 369.7 14.3 384 32 384C49.7 384 64 369.7 64 352L64 314.5C64 306 67.4 297.9 73.4 291.9zM609 337C618.4 327.6 618.4 312.4 609 303.1L537 231.1C527.6 221.7 512.4 221.7 503.1 231.1C493.8 240.5 493.7 255.7 503.1 265L534.1 296L432 296C418.7 296 408 306.7 408 320C408 333.3 418.7 344 432 344L534.1 344L503.1 375C493.7 384.4 493.7 399.6 503.1 408.9C512.5 418.2 527.7 418.3 537 408.9L609 336.9z"/>
+                        </svg>
+                    </div>
+                    <h3>Plán Advance</h3>
+                    <p>Doporučuje se pro lékařské účely nebo plánovanou terapii, kde je potřeba středně rychlé dodání. </p>
+                    <p>Cena Odběru DNA stojí 19 990 Kč</p>
+                    <p>Dodání do 5. měsíců</p>
+                </div>
+                <button class="plan-button" onclick="addToCart('Plán Advance', 699990)">Koupit - 699 990 Kč</button>
+            </div>
+
+            <div class="glass-card plan-card">
+                <div>
+                    <div class="plan-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640" fill="white">
+                            <path d="M160 144C190.9 144 216 118.9 216 88C216 57.1 190.9 32 160 32C129.1 32 104 57.1 104 88C104 118.9 129.1 144 160 144zM73.4 291.9L96 269.3L96 338.6C96 366.6 108.2 393.3 129.5 411.5L200.9 472.7C206.8 477.8 210.7 484.8 211.8 492.5L224.4 580.6C226.9 598.1 243.1 610.3 260.6 607.8C278.1 605.3 290.3 589.1 287.8 571.6L275.2 483.5C271.9 460.4 260.3 439.4 242.6 424.2L208.1 394.6L208.1 279.4L211.9 284.1C230.1 306.9 257.7 320.1 286.9 320.1L320.1 320.1C337.8 320.1 352.1 305.8 352.1 288.1C352.1 270.4 337.8 256.1 320.1 256.1L286.9 256.1C277.2 256.1 268 251.7 261.9 244.1L244 221.7C221 192.9 186.1 176.1 149.2 176.1C117 176.1 86.1 188.9 63.4 211.7L28.1 246.6C10.1 264.6 0 289 0 314.5L0 352C0 369.7 14.3 384 32 384C49.7 384 64 369.7 64 352L64 314.5C64 306 67.4 297.9 73.4 291.9zM609 337C618.4 327.6 618.4 312.4 609 303.1L537 231.1C527.6 221.7 512.4 221.7 503.1 231.1C493.8 240.5 493.7 255.7 503.1 265L534.1 296L432 296C418.7 296 408 306.7 408 320C408 333.3 418.7 344 432 344L534.1 344L503.1 375C493.7 384.4 493.7 399.6 503.1 408.9C512.5 418.2 527.7 418.3 537 408.9L609 336.9z"/>
+                        </svg>
+                    </div>
+                    <h3>Plán Velocity</h3>
+                    <p>Tento plán je určen pro urgentní potřeby, například při náhlé diagnóze nebo rychlém <br>vývoji. </p>
+                    <p>Cena Odběru DNA stojí 19 990 Kč</p>
+                    <p>Dodání do 3. měsíců</p>
+                </div>
+                <button class="plan-button" onclick="addToCart('Plán Velocity', 899990)">Koupit - 899 990 Kč</button>
+            </div>
+
+            <div class="glass-card plan-card">
+                <div>
+                    <div class="plan-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640" fill="white">
+                            <path d="M160 144C190.9 144 216 118.9 216 88C216 57.1 190.9 32 160 32C129.1 32 104 57.1 104 88C104 118.9 129.1 144 160 144zM73.4 291.9L96 269.3L96 338.6C96 366.6 108.2 393.3 129.5 411.5L200.9 472.7C206.8 477.8 210.7 484.8 211.8 492.5L224.4 580.6C226.9 598.1 243.1 610.3 260.6 607.8C278.1 605.3 290.3 589.1 287.8 571.6L275.2 483.5C271.9 460.4 260.3 439.4 242.6 424.2L208.1 394.6L208.1 279.4L211.9 284.1C230.1 306.9 257.7 320.1 286.9 320.1L320.1 320.1C337.8 320.1 352.1 305.8 352.1 288.1C352.1 270.4 337.8 256.1 320.1 256.1L286.9 256.1C277.2 256.1 268 251.7 261.9 244.1L244 221.7C221 192.9 186.1 176.1 149.2 176.1C117 176.1 86.1 188.9 63.4 211.7L28.1 246.6C10.1 264.6 0 289 0 314.5L0 352C0 369.7 14.3 384 32 384C49.7 384 64 369.7 64 352L64 314.5C64 306 67.4 297.9 73.4 291.9zM609 337C618.4 327.6 618.4 312.4 609 303.1L537 231.1C527.6 221.7 512.4 221.7 503.1 231.1C493.8 240.5 493.7 255.7 503.1 265L534.1 296L432 296C418.7 296 408 306.7 408 320C408 333.3 418.7 344 432 344L534.1 344L503.1 375C493.7 384.4 493.7 399.6 503.1 408.9C512.5 418.2 527.7 418.3 537 408.9L609 336.9z"/>
+                        </svg>
+                    </div>
+                    <h3>Plán Quantum</h3>
+                    <p>Plán je ideální pro VIP klientelu, krizové situace nebo strategické projekty s vysokou <br>prioritou.</p>
+                    <p>Cena Odběru DNA stojí 19 990 Kč</p>
+                    <p>Dodání do měsíce</p>
+                </div>
+                <button class="plan-button" onclick="addToCart('Plán Quantum', 999990)">Koupit - 999 990 Kč</button>
+            </div>
+
+            <div class="glass-card footer-card">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Navigace</h3>
+                        <ul>
+                            <li><a href="#home">Domov</a></li>
+                            <li><a href="#about">O nás</a></li>
+                            <li><a href="#store">Obchod</a></li>
+                            <li><a href="tos.html">Podmínky</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Kontakt</h3>
+                        <p>Email: <a href="mailto:clonex.sro@gmail.com">clonex.sro@gmail.com</a></p>
+                        <p>Telefon: <a href="tel:+420585288257">+420 585 288 257</a></p>
+                        <p>Adresa: Pasteurova 935/8a 772 00 Olomouc</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Sledujte nás</h3>
+                        <a href="https://instagram.com/clonex.sro" target="_blank" rel="noopener noreferrer">Instagram</a><br>
+                        <a href="https://x.com/clonex.sro" target="_blank" rel="noopener noreferrer">Twitter</a><br>
+                        <a href="https://tiktok.com/@clonex.sro" target="_blank" rel="noopener noreferrer">TikTok</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Clone X. Všechna práva vyhrazena.</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const cartCount = document.getElementById('cart-count');
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                function updateCartCount() {
+                    if (cartCount) {
+                        cartCount.textContent = cart.length;
+                    }
+                }
+
+                window.addToCart = function(name, price) {
+                    const item = { name, price };
+                    cart.push(item);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                    
+                    // Show confirmation
+                    alert(`✓ ${name} byl přidán do košíku!\n\nCelkem položek: ${cart.length}`);
+                };
+
+                updateCartCount();
+            });
+        </script>
+    </body>
+</html>

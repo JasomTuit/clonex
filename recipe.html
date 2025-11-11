@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="cart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <title>Clone X - Košík</title>
+</head>
+<body>
+    <div class="container">
+        <div class="glass-card navbar-card">
+            <div class="logo"><img src="img/logo.png" alt="Clone X Logo"></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Domov</a></li>
+                <li><a href="index.html#about">O nás</a></li>
+                <li><a href="index.html#store">Obchod</a></li>
+                <li><a href="cart.html">Košík (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </div>
+
+        <div class="cart-header">
+            <h1>Nákup proběhl úspěšne</h1>
+        </div>
+
+        <div class="glass-card receipt-container">
+            <div class="receipt-header">
+                <h2>ÚČTENKA</h2>
+                <p>Order #12345</p>
+                <p>Date: 11/11/2025</p>
+            </div>
+
+            <div class="cart-status">
+                ✓ Vaše objednávka byla dokončena a odeslána
+            </div>
+
+            <div class="cart-items">
+                <h3>Položky v košíku:</h3>
+                <ul id="cart-items">
+                    <li class="cart-empty">Váš košík je prázdný</li>
+                </ul>
+            </div>
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Mezisoučet:</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Poplatek za odběr DNA:</span>
+                    <span id="delivery-fees">19 990 Kč</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Celkem:</span>
+                    <span id="total">19 990 Kč</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const resetCartButton = document.getElementById('reset-cart');
+            const subtotalElement = document.getElementById('subtotal');
+            const deliveryFeesElement = document.getElementById('delivery-fees');
+            const totalElement = document.getElementById('total');
+            const orderIdElement = document.querySelector('.receipt-header p:first-of-type');
+            const dateElement = document.querySelector('.receipt-header p:last-of-type');
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            function updateCartDisplay() {
+                if (cartItemsContainer) {
+                    cartItemsContainer.innerHTML = '';
+                }
+                let subtotal = 0;
+
+                if (cart.length === 0) {
+                    const emptyLi = document.createElement('li');
+                    emptyLi.className = 'cart-empty';
+                    emptyLi.textContent = 'Váš košík je prázdný';
+                    cartItemsContainer.appendChild(emptyLi);
+                } else {
+                    cart.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = `${item.name} - ${item.price.toLocaleString('cs-CZ')} Kč`;
+                        cartItemsContainer.appendChild(li);
+                        subtotal += item.price;
+                    });
+                }
+
+                if (subtotalElement) {
+                    subtotalElement.textContent = `${subtotal.toLocaleString('cs-CZ')} Kč`;
+                }
+                
+                const deliveryFees = 19990;
+                if (deliveryFeesElement) {
+                    deliveryFeesElement.textContent = `${deliveryFees.toLocaleString('cs-CZ')} Kč`;
+                }
+                
+                const total = subtotal + deliveryFees;
+                if (totalElement) {
+                    totalElement.textContent = `${total.toLocaleString('cs-CZ')} Kč`;
+                }
+                
+                if (cartCount) {
+                    cartCount.textContent = cart.length;
+                }
+
+                const orderId = generateOrderId();
+                const currentDate = new Date().toLocaleDateString('cs-CZ');
+                if (orderIdElement) {
+                    orderIdElement.textContent = `Order #${orderId}`;
+                }
+                if (dateElement) {
+                    dateElement.textContent = `Datum: ${currentDate}`;
+                }
+            }
+
+            function generateOrderId() {
+                return Math.floor(Math.random() * 100000);
+            }
+
+            function resetCart() {
+                if (confirm('Opravdu chcete vyprázdnit košík?')) {
+                    cart = [];
+                    localStorage.removeItem('cart');
+                    updateCartDisplay();
+                }
+            }
+
+            if (resetCartButton) {
+                resetCartButton.addEventListener('click', resetCart);
+            }
+
+            updateCartDisplay();
+        });
+    </script>
+</body>
+</html>
