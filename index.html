@@ -1,160 +1,755 @@
 <!DOCTYPE html>
-<html lang="cz">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <title>Clone X</title>
-    </head>
-    <body>
-        <div class="floating-elements">
-            <div class="floating-circle"></div>
-            <div class="floating-circle"></div>
-            <div class="floating-circle"></div>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloneX - Spánek optimalizovaný vědou</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ef4444;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, #bec9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+            text-decoration: none;
+        }
+
+        .cards-grid:visited {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .cards-grid:hover {
+            text-decoration: none;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e293b;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            scroll-behavior: smooth;
+        }
+
+        .card a {
+            text-decoration: none;
+            scroll-behavior: smooth;
+        }
+
+        .card a:hover {
+            text-decoration: none;
+        }
+
+        .card a:visited {
+            text-decoration: none;
+        }
+
+        .card:hover {
+            text-decoration: none;
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card-icon:hover {
+            text-decoration: none;
+        }
+
+        .card-icon:visited {
+            text-decoration: none;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        .card p {
+            line-height: 1.6;
+            color: #475569;
+            margin-bottom: 1rem;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .card ul li {
+            padding: 0.5rem 0;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card ul li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #7e22ce;
+            margin: 1.5rem 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e293b;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-section h2 {
+            color: #1e3c72;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .about-section p {
+            line-height: 1.8;
+            color: #475569;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-section ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .about-section ol li {
+            line-height: 1.8;
+            color: #475569;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-section ol li strong {
+            color: #1e3c72;
+        }
+
+        .diagnosis-steps {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step h4 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .step ul {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .step ul li {
+            padding: 0.3rem 0;
+            color: #64748b;
+            padding-left: 1.5rem;
+        }
+
+        .step ul li:before {
+            content: "•";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .receipt-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e293b;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .receipt-header h2 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .receipt-items {
+            margin: 2rem 0;
+        }
+
+        .receipt-items ul {
+            list-style: none;
+        }
+
+        .receipt-items li {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+        }
+
+        .receipt-totals {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            color: #475569;
+        }
+
+        .total-row.final {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #1e3c72;
+        }
+
+        #reset-cart {
+            margin-top: 2rem;
+        }
+
+        footer {
+            padding: 1.5rem 3rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            color: #fff;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .footer div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 0;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">
+                <a href="#" onclick="showPage('home')"><img src="img/logo.png" alt="CloneX Logo"></a>
+            </div>
+            <div style="font-size: 0.6rem; font-weight: normal; opacity: 0.8;">Spánek optimalizovaný vědou</div>
+        </div>
+        <div class="nav-links">
+            <a href="#" onclick="showPage('home')">🏠 Domů</a>
+            <a href="#" onclick="showPage('about')">📋 Podmínky</a>
+            <a href="#" onclick="showPage('receipt')">
+                <span class="cart-icon">
+                    🛒
+                    <span class="cart-count" id="cart-count">0</span>
+                </span>
+                Košík
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="home-page">
+            <div class="hero">
+                <h1>CloneX</h1>
+                <p>Spánek optimalizovaný vědou</p>
+            </div>
+
+            <div class="section-title">
+                Polovina lidí v Česku trpí poruchami spánku – studenti, pracující i mladí rodiče. I když spí, jejich tělo se nestačí zregenerovat. A právě proto jsme vznikli. CloneX je spánková kapsle, která bezpečně navede tělo do hlubokého spánku a umožní plnou regeneraci v krátkém čase.
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <a href="#dlouhodobý">
+                    <h3>Dlouhodobý plán</h3>
+                    <p>Systematická regenerace a obnova spánkového rytmu – 2hodinová sezení v kapsli pro maximální odpočinek. Program na míru s úvodní konzultací.</p>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="#walkin">
+                    <h3>Walk-in</h3>
+                    <p>Objev sílu spánku nové generace – 1 hodina jako 4, 2 hodiny jako celá noc. Maximální regenerace těla i mysli díky jednorázovému sezení s odbornou konzultací.</p>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <h3>Diagnóza</h3>
+                    <p>Komplexní péče o váš spánek – úvodní rozhovor, rychlé měření a doporučení dalšího postupu. Vše během půl hodiny pro jasný přehled a cestu k lepšímu odpočinku.</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; font-size: 2.5rem; margin: 4rem 0 3rem 0;" id="dlouhodobý">Dlouhodobé plány</h2>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Měsíční program</h3>
+                    <p>20 spánků po 2 hodiny v kapsli, která aktivuje hluboký spánek pro maximální regeneraci. Úvodní konzultace zajistí program na míru.</p>
+                    <ul>
+                        <li>20 spánků</li>
+                        <li>2 hodiny spánku</li>
+                        <li>Hluboká regenerace</li>
+                    </ul>
+                    <div class="price">15 000 Kč</div>
+                    <button class="btn" onclick="addToCart('Měsíční plán (20 terapií)', 15000)">Přidat do košíku</button>
+                </div>
+
+                <div class="card">
+                    <h3>Program na 3 měsíce</h3>
+                    <p>60 spánků po 2 hodiny v kapsli pro hlubokou regeneraci. Úvodní konzultace nastaví vše na míru.</p>
+                    <ul>
+                        <li>60 spánků</li>
+                        <li>2 hodiny spánku</li>
+                        <li>Individuální regenerace</li>
+                    </ul>
+                    <div class="price">40 000 Kč</div>
+                    <button class="btn" onclick="addToCart('3měsíční plán (60 terapií)', 40000)">Přidat do košíku</button>
+                </div>
+
+                <div class="card">
+                    <h3>6měsíční program</h3>
+                    <p>120 spánků po 2 hodiny v kapsli, která aktivuje všechny fáze hlubokého spánku. Úvodní konzultace nastaví regeneraci přesně na míru.</p>
+                    <ul>
+                        <li>120 spánků</li>
+                        <li>2 hodiny spánku</li>
+                        <li>Maximální regenerace</li>
+                    </ul>
+                    <div class="price">75 000 Kč</div>
+                    <button class="btn" onclick="addToCart('6měsíční plán (120 terapií)', 75000)">Přidat do košíku</button>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; font-size: 2.5rem; margin: 4rem 0 3rem 0;" id="walkin">Walk-in</h2>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>1 hodina spánku</h3>
+                    <p>1 hodina spánku odpovídá čtyřem hodinám spánku v normální posteli. Krátká konzultace pro maximální efektivitu.</p>
+                    <ul>
+                        <li>Rychlá regenerace</li>
+                        <li>Odpovídá 4 hodinám běžného spánku</li>
+                        <li>Krátká konzultace</li>
+                    </ul>
+                    <div class="price">900 Kč</div>
+                    <button class="btn" onclick="addToCart('Walk-in 1h', 900)">Přidat do košíku</button>
+                </div>
+
+                <div class="card">
+                    <h3>2 hodiny spánku</h3>
+                    <p>2 hodiny spánku odpovídají osmi hodinám spánku v normální posteli. Plnohodnotná regenerace těla i mysli.</p>
+                    <ul>
+                        <li>Plná regenerace</li>
+                        <li>Odpovídá 8 hodinám běžného spánku</li>
+                        <li>Krátká konzultace</li>
+                    </ul>
+                    <div class="price">900 Kč</div>
+                    <button class="btn" onclick="addToCart('Walk-in 2h', 900)">Přidat do košíku</button>
+                </div>
+            </div>
         </div>
 
-        <div class="container">
-            <div class="glass-card navbar-card">
-                <div class="logo"><img src="img/logo.png"></div>
-                <ul class="nav-links">
-                    <li><a href="#home">Domov</a></li>
-                    <li><a href="#about">O nás</a></li>
-                    <li><a href="#store">Obchod</a></li>
-                    <li><a href="cart.html">Košík (<span id="cart-count">0</span>)</a></li>
-                </ul>
-                <a href="tos.html"><button class="terms-button">Podmínky</button></a>
+        <!-- ABOUT PAGE -->
+        <div id="about-page" class="hidden">
+            <div class="about-section">
+                <h2>📋 Podmínky využití služeb</h2>
+                <ol>
+                    <li><strong>Úvodní ustanovení</strong><br>Tyto obchodní a provozní podmínky (dále jen „Podmínky“) upravují práva a povinnosti mezi společností CloneX (dále jen „Poskytovatel“) a zákazníky využívajícími služby spojené s elektromagneticky upraveným spánkem (dále jen „Služba“).</li>
+                    <li><strong>Charakter služeb</strong><br>Služba spočívá v podpoře spánku pomocí technologicky kontrolovaných elektromagnetických vln. Služba není zdravotnickou službou a nenahrazuje odbornou lékařskou péči. Zákazník bere na vědomí, že jakékoli účinky spojené s využitím Služby mohou být individuální a Poskytovatel nezaručuje konkrétní výsledek.</li>
+                    <li><strong>Věk zákazníka</strong><br>Službu mohou využívat pouze osoby starší 18 let. Osoby ve věku 15–18 let mohou využít Službu pouze za přítomnosti zákonného zástupce a s jeho písemným souhlasem. Osobám mladším 15 let není využití Služby povoleno.</li>
+                    <li><strong>Bezpečnost a odpovědnost</strong><br>Zákazník je povinen respektovat pokyny personálu Poskytovatele, dodržovat provozní řád a bezpečnostní pravidla. Poskytovatel nenese odpovědnost za jakékoli úrazy, újmy na zdraví nebo škody vzniklé v důsledku nedodržení pokynů personálu či porušení Podmínek ze strany zákazníka. Zákazník bere na vědomí, že služby jsou poskytovány na vlastní odpovědnost.</li>
+                    <li><strong>Zdravotní stav zákazníka</strong><br>Zákazník potvrzuje, že netrpí zdravotními potížemi, které by mohly negativně ovlivnit využití Služby (například neurologické poruchy, kardiostimulátory, epilepsie, těhotenství aj.). V případě pochybností je zákazník povinen poradit se s lékařem. Poskytovatel nenese odpovědnost za následky vyplývající z nepravdivých informací o zdravotním stavu.</li>
+                    <li><strong>Rezervace a platby</strong><br>Rezervace Služby se provádí prostřednictvím webu nebo na recepci. Ceny jsou uvedeny včetně DPH. Zrušení rezervace je možné nejpozději 24 hodin před jejím začátkem, jinak může být účtován storno poplatek.</li>
+                    <li><strong>Ochrana osobních údajů</strong><br>Poskytovatel zpracovává osobní údaje zákazníků pouze za účelem poskytování Služby v souladu s platnými právními předpisy. Více informací je uvedeno v dokumentu Zásady ochrany osobních údajů.</li>
+                    <li><strong>Zákaz nevhodného chování</strong><br>Zákazník nesmí využívat Službu pod vlivem alkoholu, omamných nebo psychotropních látek. Personál má právo odmítnout poskytnutí Služby při podezření na nevhodný stav zákazníka.</li>
+                    <li><strong>Reklamace a technické problémy</strong><br>V případě nespokojenosti či technického selhání může zákazník podat reklamaci bez zbytečného odkladu. Poskytovatel se zavazuje reklamaci vyřídit v přiměřené lhůtě.</li>
+                    <li><strong>Závěrečná ustanovení</strong><br>Poskytovatel si vyhrazuje právo kdykoli změnit tyto Podmínky. Aktuální znění je vždy dostupné na webových stránkách. Využitím Služby zákazník potvrzuje, že se s Podmínkami seznámil, rozumí jim a souhlasí s nimi.</li>
+                </ol>
             </div>
 
-            <div class="glass-card hero-card" id="home">
-                <div class="hero-title">CLONE X</div>
-                <div class="hero-slogan">S námi to neznamená konec</div>
-                <button class="cta-button">
-                    <a href="#store">Koupit teď</a>
-                </button>
-            </div>
-
-            <div class="glass-card about-card" id="about">
-                <h2>O nás</h2>
-                <p>Ve společnosti CloneX se zabýváme vytvářením lidí za pomoci jejich odebrané DNA. Klientům odebereme vzorek, z nějž izolujeme genetickou informaci, a tuto informaci poté vložíme do upraveného vajíčka, které je bez DNA. Takto vzniklé embryo se dále vyvijí v kontrolovaném prostředí a po vybrané době bude zralé. Klon může být užitečný pro lékařské účely. Klon zaručuje etiku, souhlas a samostatnost každého klonovaného jedince.</p>
-            </div>
-
-            <div class="glass-card plan-card" id="store">
-                <div>
-                    <div class="plan-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640" fill="white">
-                            <path d="M160 144C190.9 144 216 118.9 216 88C216 57.1 190.9 32 160 32C129.1 32 104 57.1 104 88C104 118.9 129.1 144 160 144zM73.4 291.9L96 269.3L96 338.6C96 366.6 108.2 393.3 129.5 411.5L200.9 472.7C206.8 477.8 210.7 484.8 211.8 492.5L224.4 580.6C226.9 598.1 243.1 610.3 260.6 607.8C278.1 605.3 290.3 589.1 287.8 571.6L275.2 483.5C271.9 460.4 260.3 439.4 242.6 424.2L208.1 394.6L208.1 279.4L211.9 284.1C230.1 306.9 257.7 320.1 286.9 320.1L320.1 320.1C337.8 320.1 352.1 305.8 352.1 288.1C352.1 270.4 337.8 256.1 320.1 256.1L286.9 256.1C277.2 256.1 268 251.7 261.9 244.1L244 221.7C221 192.9 186.1 176.1 149.2 176.1C117 176.1 86.1 188.9 63.4 211.7L28.1 246.6C10.1 264.6 0 289 0 314.5L0 352C0 369.7 14.3 384 32 384C49.7 384 64 369.7 64 352L64 314.5C64 306 67.4 297.9 73.4 291.9zM609 337C618.4 327.6 618.4 312.4 609 303.1L537 231.1C527.6 221.7 512.4 221.7 503.1 231.1C493.8 240.5 493.7 255.7 503.1 265L534.1 296L432 296C418.7 296 408 306.7 408 320C408 333.3 418.7 344 432 344L534.1 344L503.1 375C493.7 384.4 493.7 399.6 503.1 408.9C512.5 418.2 527.7 418.3 537 408.9L609 336.9z"/>
-                        </svg>
-                    </div>
-                    <h3>Plán Origin</h3>
-                    <p>Doba dodání klonu je 9 měsíců. Tento plán je vhodný pro dlouhodobé projekty, kde není časový tlak.</p>
-                    <p>Cena Odběru DNA stojí 19 990 Kč</p>
-                    <p>Dodání do 9. měsíců</p>
-                </div>
-                <button class="plan-button" onclick="addToCart('Plán Origin', 499990)">Koupit - 499 990 Kč</button>
-            </div>
-
-            <div class="glass-card plan-card">
-                <div>
-                    <div class="plan-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640" fill="white">
-                            <path d="M160 144C190.9 144 216 118.9 216 88C216 57.1 190.9 32 160 32C129.1 32 104 57.1 104 88C104 118.9 129.1 144 160 144zM73.4 291.9L96 269.3L96 338.6C96 366.6 108.2 393.3 129.5 411.5L200.9 472.7C206.8 477.8 210.7 484.8 211.8 492.5L224.4 580.6C226.9 598.1 243.1 610.3 260.6 607.8C278.1 605.3 290.3 589.1 287.8 571.6L275.2 483.5C271.9 460.4 260.3 439.4 242.6 424.2L208.1 394.6L208.1 279.4L211.9 284.1C230.1 306.9 257.7 320.1 286.9 320.1L320.1 320.1C337.8 320.1 352.1 305.8 352.1 288.1C352.1 270.4 337.8 256.1 320.1 256.1L286.9 256.1C277.2 256.1 268 251.7 261.9 244.1L244 221.7C221 192.9 186.1 176.1 149.2 176.1C117 176.1 86.1 188.9 63.4 211.7L28.1 246.6C10.1 264.6 0 289 0 314.5L0 352C0 369.7 14.3 384 32 384C49.7 384 64 369.7 64 352L64 314.5C64 306 67.4 297.9 73.4 291.9zM609 337C618.4 327.6 618.4 312.4 609 303.1L537 231.1C527.6 221.7 512.4 221.7 503.1 231.1C493.8 240.5 493.7 255.7 503.1 265L534.1 296L432 296C418.7 296 408 306.7 408 320C408 333.3 418.7 344 432 344L534.1 344L503.1 375C493.7 384.4 493.7 399.6 503.1 408.9C512.5 418.2 527.7 418.3 537 408.9L609 336.9z"/>
-                        </svg>
-                    </div>
-                    <h3>Plán Advance</h3>
-                    <p>Doporučuje se pro lékařské účely nebo plánovanou terapii, kde je potřeba středně rychlé dodání. </p>
-                    <p>Cena Odběru DNA stojí 19 990 Kč</p>
-                    <p>Dodání do 5. měsíců</p>
-                </div>
-                <button class="plan-button" onclick="addToCart('Plán Advance', 699990)">Koupit - 699 990 Kč</button>
-            </div>
-
-            <div class="glass-card plan-card">
-                <div>
-                    <div class="plan-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640" fill="white">
-                            <path d="M160 144C190.9 144 216 118.9 216 88C216 57.1 190.9 32 160 32C129.1 32 104 57.1 104 88C104 118.9 129.1 144 160 144zM73.4 291.9L96 269.3L96 338.6C96 366.6 108.2 393.3 129.5 411.5L200.9 472.7C206.8 477.8 210.7 484.8 211.8 492.5L224.4 580.6C226.9 598.1 243.1 610.3 260.6 607.8C278.1 605.3 290.3 589.1 287.8 571.6L275.2 483.5C271.9 460.4 260.3 439.4 242.6 424.2L208.1 394.6L208.1 279.4L211.9 284.1C230.1 306.9 257.7 320.1 286.9 320.1L320.1 320.1C337.8 320.1 352.1 305.8 352.1 288.1C352.1 270.4 337.8 256.1 320.1 256.1L286.9 256.1C277.2 256.1 268 251.7 261.9 244.1L244 221.7C221 192.9 186.1 176.1 149.2 176.1C117 176.1 86.1 188.9 63.4 211.7L28.1 246.6C10.1 264.6 0 289 0 314.5L0 352C0 369.7 14.3 384 32 384C49.7 384 64 369.7 64 352L64 314.5C64 306 67.4 297.9 73.4 291.9zM609 337C618.4 327.6 618.4 312.4 609 303.1L537 231.1C527.6 221.7 512.4 221.7 503.1 231.1C493.8 240.5 493.7 255.7 503.1 265L534.1 296L432 296C418.7 296 408 306.7 408 320C408 333.3 418.7 344 432 344L534.1 344L503.1 375C493.7 384.4 493.7 399.6 503.1 408.9C512.5 418.2 527.7 418.3 537 408.9L609 336.9z"/>
-                        </svg>
-                    </div>
-                    <h3>Plán Velocity</h3>
-                    <p>Tento plán je určen pro urgentní potřeby, například při náhlé diagnóze nebo rychlém <br>vývoji. </p>
-                    <p>Cena Odběru DNA stojí 19 990 Kč</p>
-                    <p>Dodání do 3. měsíců</p>
-                </div>
-                <button class="plan-button" onclick="addToCart('Plán Velocity', 899990)">Koupit - 899 990 Kč</button>
-            </div>
-
-            <div class="glass-card plan-card">
-                <div>
-                    <div class="plan-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640" fill="white">
-                            <path d="M160 144C190.9 144 216 118.9 216 88C216 57.1 190.9 32 160 32C129.1 32 104 57.1 104 88C104 118.9 129.1 144 160 144zM73.4 291.9L96 269.3L96 338.6C96 366.6 108.2 393.3 129.5 411.5L200.9 472.7C206.8 477.8 210.7 484.8 211.8 492.5L224.4 580.6C226.9 598.1 243.1 610.3 260.6 607.8C278.1 605.3 290.3 589.1 287.8 571.6L275.2 483.5C271.9 460.4 260.3 439.4 242.6 424.2L208.1 394.6L208.1 279.4L211.9 284.1C230.1 306.9 257.7 320.1 286.9 320.1L320.1 320.1C337.8 320.1 352.1 305.8 352.1 288.1C352.1 270.4 337.8 256.1 320.1 256.1L286.9 256.1C277.2 256.1 268 251.7 261.9 244.1L244 221.7C221 192.9 186.1 176.1 149.2 176.1C117 176.1 86.1 188.9 63.4 211.7L28.1 246.6C10.1 264.6 0 289 0 314.5L0 352C0 369.7 14.3 384 32 384C49.7 384 64 369.7 64 352L64 314.5C64 306 67.4 297.9 73.4 291.9zM609 337C618.4 327.6 618.4 312.4 609 303.1L537 231.1C527.6 221.7 512.4 221.7 503.1 231.1C493.8 240.5 493.7 255.7 503.1 265L534.1 296L432 296C418.7 296 408 306.7 408 320C408 333.3 418.7 344 432 344L534.1 344L503.1 375C493.7 384.4 493.7 399.6 503.1 408.9C512.5 418.2 527.7 418.3 537 408.9L609 336.9z"/>
-                        </svg>
-                    </div>
-                    <h3>Plán Quantum</h3>
-                    <p>Plán je ideální pro VIP klientelu, krizové situace nebo strategické projekty s vysokou <br>prioritou.</p>
-                    <p>Cena Odběru DNA stojí 19 990 Kč</p>
-                    <p>Dodání do měsíce</p>
-                </div>
-                <button class="plan-button" onclick="addToCart('Plán Quantum', 999990)">Koupit - 999 990 Kč</button>
-            </div>
-
-            <div class="glass-card footer-card">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h3>Navigace</h3>
+            <div class="about-section">
+                <h2>🩺 Průběh diagnózy</h2>
+                <p>Komplexní vyšetření spánku trvá přibližně 30-40 minut a skládá se ze tří částí:</p>
+                
+                <div class="diagnosis-steps">
+                    <div class="step">
+                        <h4>A – Úvodní rozhovor (10–15 min)</h4>
                         <ul>
-                            <li><a href="#home">Domov</a></li>
-                            <li><a href="#about">O nás</a></li>
-                            <li><a href="#store">Obchod</a></li>
-                            <li><a href="tos.html">Podmínky</a></li>
+                            <li>Stručné probrání potíží: problémy se spánkem, délka, kvalita, probouzení, chrápání, únava</li>
+                            <li>Základní informace o krevním tlaku, případné dřívější měření</li>
+                            <li>Prodělané nemoci, užívané léky, životní styl, stres, návyky před spaním</li>
                         </ul>
                     </div>
-                    <div class="footer-section">
-                        <h3>Kontakt</h3>
-                        <p>Email: <a href="mailto:clonex.sro@gmail.com">clonex.sro@gmail.com</a></p>
-                        <p>Telefon: <a href="tel:+420585288257">+420 585 288 257</a></p>
-                        <p>Adresa: Pasteurova 935/8a 772 00 Olomouc</p>
+
+                    <div class="step">
+                        <h4>B – Posouzení (10–15 min)</h4>
+                        <ul>
+                            <li>Orientační změření krevního tlaku</li>
+                            <li>Jednoduché otázky na možné symptomy spánkových poruch</li>
+                        </ul>
                     </div>
-                    <div class="footer-section">
-                        <h3>Sledujte nás</h3>
-                        <a href="https://instagram.com/clonex.sro" target="_blank" rel="noopener noreferrer">Instagram</a><br>
-                        <a href="https://x.com/clonex.sro" target="_blank" rel="noopener noreferrer">Twitter</a><br>
-                        <a href="https://tiktok.com/@clonex.sro" target="_blank" rel="noopener noreferrer">TikTok</a>
+
+                    <div class="step">
+                        <h4>C – Vyhodnocení (10 min)</h4>
+                        <ul>
+                            <li>Shrnutí zjištění</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2025 Clone X. Všechna práva vyhrazena.</p>
+
+                    <div class="step">
+                        <h4>D – Doporučení dalšího postupu</h4>
+                        <ul>
+                            <li>Doporučení, zda je vhodné další odborné vyšetření</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const cartCount = document.getElementById('cart-count');
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        <!-- RECEIPT PAGE -->
+        <div id="receipt-page" class="hidden">
+            <div class="receipt-container">
+                <div class="receipt-header">
+                    <h2>🛒 Váš košík</h2>
+                    <p>Objednávka #<span id="order-id">00000</span></p>
+                    <p>Datum: <span id="order-date">--</span></p>
+                </div>
 
-                function updateCartCount() {
-                    if (cartCount) {
-                        cartCount.textContent = cart.length;
-                    }
-                }
+                <div class="receipt-items">
+                    <h3 style="margin-bottom: 1rem; color: #1e3c72;">Položky:</h3>
+                    <ul id="cart-items">
+                        <li style="text-align: center; color: #94a3b8;">Košík je prázdný</li>
+                    </ul>
+                </div>
 
-                window.addToCart = function(name, price) {
-                    const item = { name, price };
-                    cart.push(item);
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    updateCartCount();
-                    
-                    // Show confirmation
-                    alert(`✓ ${name} byl přidán do košíku!\n\nCelkem položek: ${cart.length}`);
-                };
+                <div class="receipt-totals">
+                    <div class="total-row">
+                        <span>Mezisoučet:</span>
+                        <span id="subtotal">0 Kč</span>
+                    </div>
+                    <div class="total-row final">
+                        <span>Celkem:</span>
+                        <span id="total">0 Kč</span>
+                    </div>
+                </div>
 
-                updateCartCount();
-            });
-        </script>
-    </body>
+                <button class="btn" id="reset-cart">Vyprázdnit košík</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer">
+            <div class="contact">
+                <p>Email: <a href="mailto:clonex.sro@gmail.com">clonex.sro@gmail.com</a></p>
+                <p>Telefon: <a href="tel:+420585288257">+420 585 288 257</a></p>
+                <p>Adresa: Pasteurova 935/8a, 722 00 Olomouc</p>
+            </div>
+            <div class="social">
+                <a href="https://www.instagram.com/clonex.sro">Instagram</a>
+                <a href="https://x.com/clonex.sro">Twitter</a>
+                <a href="https://www.tiktok.com/@clonex.sro">TikTok</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function showPage(page) {
+            document.getElementById('home-page').classList.add('hidden');
+            document.getElementById('about-page').classList.add('hidden');
+            document.getElementById('receipt-page').classList.add('hidden');
+            document.getElementById(page + '-page').classList.remove('hidden');
+            
+            if (page === 'receipt') {
+                updateCartDisplay();
+            }
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartCount();
+            
+            // Show notification
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Přidáno!';
+            btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }, 1500);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            const orderIdElement = document.getElementById('order-id');
+            const dateElement = document.getElementById('order-date');
+
+            cartItemsContainer.innerHTML = '';
+            let subtotal = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<li style="text-align: center; color: #94a3b8;">Košík je prázdný</li>';
+            } else {
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = `${item.name} - ${item.price.toLocaleString('cs-CZ')} Kč`;
+                    cartItemsContainer.appendChild(li);
+                    subtotal += item.price;
+                });
+            }
+
+            subtotalElement.textContent = `${subtotal.toLocaleString('cs-CZ')} Kč`;
+            totalElement.textContent = `${subtotal.toLocaleString('cs-CZ')} Kč`;
+
+            // Update order details
+            orderIdElement.textContent = Math.floor(Math.random() * 100000);
+            dateElement.textContent = new Date().toLocaleDateString('cs-CZ');
+        }
+
+        function resetCart() {
+            cart = [];
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        document.getElementById('reset-cart').addEventListener('click', resetCart);
+
+        // Initialize
+        updateCartCount();
+    </script>
+</body>
 </html>
