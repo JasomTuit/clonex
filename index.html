@@ -382,7 +382,7 @@
             border-top: 2px solid #1e3c72;
         }
 
-        #reset-cart {
+        #reset-cart, #checkout-btn {
             margin-top: 2rem;
         }
 
@@ -567,8 +567,8 @@
                         <li>Odpovídá 8 hodinám běžného spánku</li>
                         <li>Krátká konzultace</li>
                     </ul>
-                    <div class="price">900 Kč</div>
-                    <button class="btn" onclick="addToCart('Walk-in 2h', 900)">Přidat do košíku</button>
+                    <div class="price">1800 Kč</div>
+                    <button class="btn" onclick="addToCart('Walk-in 2h', 1800)">Přidat do košíku</button>
                 </div>
             </div>
         </div>
@@ -658,6 +658,17 @@
                 </div>
 
                 <button class="btn" id="reset-cart">Vyprázdnit košík</button>
+                <button class="btn" id="checkout-btn">Koupit</button>
+            </div>
+        </div>
+
+        <!-- THANK YOU PAGE -->
+        <div id="thankyou-page" class="hidden">
+            <div class="receipt-container">
+                <div class="receipt-header">
+                    <h2>Ďekujeme za váš nákup!</h2>
+                    <p>Vaše objednávka byla úspěšně zpracována.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -684,6 +695,7 @@
             document.getElementById('home-page').classList.add('hidden');
             document.getElementById('about-page').classList.add('hidden');
             document.getElementById('receipt-page').classList.add('hidden');
+            document.getElementById('thankyou-page').classList.add('hidden');
             document.getElementById(page + '-page').classList.remove('hidden');
             
             if (page === 'receipt') {
@@ -717,12 +729,14 @@
             const totalElement = document.getElementById('total');
             const orderIdElement = document.getElementById('order-id');
             const dateElement = document.getElementById('order-date');
+            const checkoutBtn = document.getElementById('checkout-btn');
 
             cartItemsContainer.innerHTML = '';
             let subtotal = 0;
 
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = '<li style="text-align: center; color: #94a3b8;">Košík je prázdný</li>';
+                if (checkoutBtn) checkoutBtn.style.display = 'none';
             } else {
                 cart.forEach(item => {
                     const li = document.createElement('li');
@@ -730,6 +744,7 @@
                     cartItemsContainer.appendChild(li);
                     subtotal += item.price;
                 });
+                if (checkoutBtn) checkoutBtn.style.display = 'block';
             }
 
             subtotalElement.textContent = `${subtotal.toLocaleString('cs-CZ')} Kč`;
@@ -746,7 +761,13 @@
             updateCartDisplay();
         }
 
+        function checkout() {
+            showPage('thankyou');
+            resetCart();
+        }
+
         document.getElementById('reset-cart').addEventListener('click', resetCart);
+        document.getElementById('checkout-btn').addEventListener('click', checkout);
 
         // Initialize
         updateCartCount();
