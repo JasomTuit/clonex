@@ -1,952 +1,455 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloneX - Spánek optimalizovaný vědou</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
-            color: #fff;
-            min-height: 100vh;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 3rem;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        .logo-icon {
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .cart-icon {
-            position: relative;
-            font-size: 1.5rem;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ef4444;
-            color: #fff;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem;
-        }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #048eff, #e1beff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            opacity: 0.9;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 1.3rem;
-            margin-bottom: 3rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-            text-decoration: none;
-        }
-
-        .cards-grid:visited {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .cards-grid:hover {
-            text-decoration: none;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            color: #1e293b;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            scroll-behavior: smooth;
-        }
-
-        .card a {
-            text-decoration: none;
-            scroll-behavior: smooth;
-        }
-
-        .card a:hover {
-            text-decoration: none;
-        }
-
-        .card a:visited {
-            text-decoration: none;
-        }
-
-        .card:hover {
-            text-decoration: none;
-            transform: translateY(-10px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .card-icon:hover {
-            text-decoration: none;
-        }
-
-        .card-icon:visited {
-            text-decoration: none;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #1e3c72;
-            text-decoration: none;
-        }
-
-        .card p {
-            line-height: 1.6;
-            color: #475569;
-            margin-bottom: 1rem;
-        }
-
-        .card ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .card ul li {
-            padding: 0.5rem 0;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .card ul li:before {
-            content: "✓";
-            color: #10b981;
-            font-weight: bold;
-        }
-
-        .price {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #7e22ce;
-            margin: 1.5rem 0;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .about-section {
-            background: rgba(255, 255, 255, 0.95);
-            color: #1e293b;
-            padding: 3rem;
-            border-radius: 20px;
-            margin-bottom: 3rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .about-section h2 {
-            color: #1e3c72;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
-
-        .about-section p {
-            line-height: 1.8;
-            color: #475569;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .about-section ol {
-            list-style-type: decimal;
-            padding-left: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .about-section ol li {
-            line-height: 1.8;
-            color: #475569;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .about-section ol li strong {
-            color: #1e3c72;
-        }
-
-        .diagnosis-steps {
-            display: grid;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .step {
-            background: rgba(102, 126, 234, 0.1);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-        }
-
-        .step h4 {
-            color: #1e3c72;
-            margin-bottom: 0.5rem;
-        }
-
-        .step ul {
-            list-style: none;
-            margin-top: 0.5rem;
-        }
-
-        .step ul li {
-            padding: 0.3rem 0;
-            color: #64748b;
-            padding-left: 1.5rem;
-        }
-
-        .step ul li:before {
-            content: "•";
-            color: #667eea;
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .receipt-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            color: #1e293b;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .receipt-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .receipt-header h2 {
-            color: #1e3c72;
-            margin-bottom: 1rem;
-        }
-
-        .receipt-items {
-            margin: 2rem 0;
-        }
-
-        .receipt-items ul {
-            list-style: none;
-        }
-
-        .receipt-items li {
-            padding: 1rem;
-            border-bottom: 1px solid #e2e8f0;
-            color: #475569;
-        }
-
-        .receipt-totals {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 2px solid #e2e8f0;
-        }
-
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            color: #475569;
-        }
-
-        .total-row.final {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1e3c72;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 2px solid #1e3c72;
-        }
-
-        #reset-cart, #checkout-btn {
-            margin-top: 2rem;
-        }
-
-        footer {
-            padding: 1.5rem 3rem;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            color: #fff;
-        }
-
-        .footer {
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
-            gap: 2rem;
-        }
-
-        .footer div {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0.5rem 0;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        .footer p {
-            margin: 0.5rem 0;
-        }
-
-        .reviews {
-            min-height: 15vh;
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .reviews-container {
-            max-width: 1200px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .reviews-card {
-            display: inline-block;
-            flex-direction: column;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.714);
-            border-radius: 24px;
-            padding: 30px;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 0.8s ease-out forwards;
-            height: 100%;
-        }
-
-        .reviews-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-align: left;
-        }
-
-        .reviews-user-icon {
-            width: 50px;
-            height: 50px;
-            flex-shrink: 0;
-        }
-
-        .reviews-user-icon img{
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            -webkit-user-drag: none;
-            -khtml-user-drag: none;
-            -moz-user-drag: none;
-            -o-user-drag: none;
-        }
-
-        .reviews-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .reviews-title {
-            font-weight: 700;
-            color: #fff; /* Changed from black for visibility */
-            margin-bottom: 4px;
-            padding: 0;
-        }
-
-        .reviews-text {
-            color: #fff; /* Changed from black for visibility */
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        @keyframes fadeInUp { /* Added missing keyframes */
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .container {
-                padding: 1.5rem;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-        }
-    </style>
+    <meta name="description"
+        content="CloneX – spánková kapsle optimalizovaná vědou. Hluboká regenerace za zlomek času.">
+    <title>CloneX – Spánek optimalizovaný vědou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <nav>
-        <div class="logo">
-            <div class="logo-icon">
-                <a href="#" onclick="showPage('home')"><img src="img/logo.png" alt="CloneX Logo"></a>
-            </div>
-        </div>
-        <div class="nav-links">
-            <a href="#" onclick="showPage('home')">🏠 Domů</a>
-            <a href="#" onclick="showPage('about')">📋 Podmínky</a>
-            <a href="#" onclick="showPage('receipt')">
-                <span class="cart-icon">
-                    🛒
-                    <span class="cart-count" id="cart-count">0</span>
-                </span>
-                Košík
+
+    <!-- ═══ NAVIGATION ═══ -->
+    <nav class="navbar navbar--top" id="navbar">
+        <div class="navbar-inner">
+            <a class="nav-logo" href="#" onclick="showPage('home')">
+                <img class="nav-logo-img" src="img/logo.png" alt="CloneX">
             </a>
+            <div class="nav-links">
+                <a class="nav-link" href="#" onclick="showPage('home')">Domů</a>
+                <a class="nav-link" href="#" onclick="showPage('about')">Podmínky</a>
+                <a class="nav-link" href="#" onclick="showPage('receipt')">
+                    <span class="cart-badge">
+                        🛒
+                        <span class="cart-badge-count" id="cart-count">0</span>
+                    </span>
+                    Košík
+                </a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Přepnout téma">🌙</button>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
-        <!-- HOME PAGE -->
-        <div id="home-page">
-            <div class="hero">
-                <h1>CloneX</h1>
-                <p>Spánek optimalizovaný vědou</p>
-            </div>
+    <!-- ═══ HOME PAGE ═══ -->
+    <div id="home-page">
 
-            <div class="section-title">
-                Polovina lidí v Česku trpí poruchami spánku – studenti, pracující i mladí rodiče. I když spí, jejich tělo se nestačí zregenerovat. A právě proto jsme vznikli. CloneX je spánková kapsle, která bezpečně navede tělo do hlubokého spánku a umožní plnou regeneraci v krátkém čase.
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">🧬 Věda pro lepší spánek</div>
+                <h1>Spánek nové<br><span class="gradient-text">generace</span></h1>
+                <p class="hero-subtitle">
+                    Polovina lidí v Česku trpí poruchami spánku. CloneX je spánková kapsle,
+                    která bezpečně navede tělo do hlubokého spánku a umožní plnou regeneraci v krátkém čase.
+                </p>
+                <div class="hero-cta">
+                    <a class="btn btn-primary" href="#services">Prozkoumat služby</a>
+                    <a class="btn btn-outline" href="#" onclick="showPage('about')">Podmínky</a>
+                </div>
             </div>
+            <div class="hero-scroll-hint">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
 
-            <div class="cards-grid">
-                <div class="card">
-                    <a href="#dlouhodobý">
-                    <h3>Dlouhodobý plán</h3>
-                    <p>Systematická regenerace a obnova spánkového rytmu – 2hodinová sezení v kapsli pro maximální odpočinek. Program na míru s úvodní konzultací.</p>
+        <!-- Services Overview -->
+        <section class="section" id="services">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-label">✦ Naše služby</div>
+                    <h2 class="section-title">Vyberte si řešení na míru</h2>
+                    <p class="section-desc">Od jednorázových sezení po komplexní programy – najděte to pravé pro váš
+                        spánek.</p>
+                </div>
+
+                <div class="services-grid">
+                    <a class="service-card reveal" href="#plans">
+                        <div class="service-card-icon">🌙</div>
+                        <h3>Dlouhodobý plán</h3>
+                        <p>Systematická regenerace a obnova spánkového rytmu – 2hodinová sezení v kapsli pro maximální
+                            odpočinek s úvodní konzultací.</p>
+                        <div class="card-arrow">Zobrazit plány →</div>
+                    </a>
+
+                    <a class="service-card reveal" href="#walkin">
+                        <div class="service-card-icon">⚡</div>
+                        <h3>Walk-in</h3>
+                        <p>1 hodina jako 4, 2 hodiny jako celá noc. Maximální regenerace těla i mysli díky jednorázovému
+                            sezení s odbornou konzultací.</p>
+                        <div class="card-arrow">Zobrazit nabídku →</div>
+                    </a>
+
+                    <a class="service-card reveal" href="#" onclick="showPage('about')">
+                        <div class="service-card-icon">🩺</div>
+                        <h3>Diagnóza</h3>
+                        <p>Komplexní péče o váš spánek – úvodní rozhovor, rychlé měření a doporučení dalšího postupu
+                            během 30 minut.</p>
+                        <div class="card-arrow">Více informací →</div>
                     </a>
                 </div>
-
-                <div class="card">
-                    <a href="#walkin">
-                    <h3>Walk-in</h3>
-                    <p>Objev sílu spánku nové generace – 1 hodina jako 4, 2 hodiny jako celá noc. Maximální regenerace těla i mysli díky jednorázovému sezení s odbornou konzultací.</p>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <h3>Diagnóza</h3>
-                    <p>Komplexní péče o váš spánek – úvodní rozhovor, rychlé měření a doporučení dalšího postupu. Vše během půl hodiny pro jasný přehled a cestu k lepšímu odpočinku.</p>
-                </div>
             </div>
+        </section>
 
-            <h2 style="text-align: center; font-size: 2.5rem; margin: 4rem 0 3rem 0;" id="dlouhodobý">Dlouhodobé plány</h2>
-
-            <div class="cards-grid">
-                <div class="card">
-                    <h3>Měsíční program</h3>
-                    <p>20 spánků po 2 hodiny v kapsli, která aktivuje hluboký spánek pro maximální regeneraci. Úvodní konzultace zajistí program na míru.</p>
-                    <ul>
-                        <li>20 spánků</li>
-                        <li>2 hodiny spánku</li>
-                        <li>Hluboká regenerace</li>
-                    </ul>
-                    <div class="price">15 000 Kč</div>
-                    <button class="btn" onclick="addToCart('Měsíční plán (20 terapií)', 15000)">Přidat do košíku</button>
+        <!-- Long-term Plans -->
+        <section class="section section--gray" id="plans">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-label">📅 Dlouhodobé plány</div>
+                    <h2 class="section-title">Investujte do svého spánku</h2>
+                    <p class="section-desc">Pravidelná sezení pro hlubokou regeneraci a trvalé výsledky.</p>
                 </div>
 
-                <div class="card">
-                    <h3>Program na 3 měsíce</h3>
-                    <p>60 spánků po 2 hodiny v kapsli pro hlubokou regeneraci. Úvodní konzultace nastaví vše na míru.</p>
-                    <ul>
-                        <li>60 spánků</li>
-                        <li>2 hodiny spánku</li>
-                        <li>Individuální regenerace</li>
-                    </ul>
-                    <div class="price">40 000 Kč</div>
-                    <button class="btn" onclick="addToCart('3měsíční plán (60 terapií)', 40000)">Přidat do košíku</button>
-                </div>
-
-                <div class="card">
-                    <h3>6měsíční program</h3>
-                    <p>120 spánků po 2 hodiny v kapsli, která aktivuje všechny fáze hlubokého spánku. Úvodní konzultace nastaví regeneraci přesně na míru.</p>
-                    <ul>
-                        <li>120 spánků</li>
-                        <li>2 hodiny spánku</li>
-                        <li>Maximální regenerace</li>
-                    </ul>
-                    <div class="price">75 000 Kč</div>
-                    <button class="btn" onclick="addToCart('6měsíční plán (120 terapií)', 75000)">Přidat do košíku</button>
-                </div>
-            </div>
-
-            <h2 style="text-align: center; font-size: 2.5rem; margin: 4rem 0 3rem 0;" id="walkin">Walk-in</h2>
-
-            <div class="cards-grid">
-                <div class="card">
-                    <h3>1 hodina spánku</h3>
-                    <p>1 hodina spánku odpovídá čtyřem hodinám spánku v normální posteli. Krátká konzultace pro maximální efektivitu.</p>
-                    <ul>
-                        <li>Rychlá regenerace</li>
-                        <li>Odpovídá 4 hodinám běžného spánku</li>
-                        <li>Krátká konzultace</li>
-                    </ul>
-                    <div class="price">900 Kč</div>
-                    <button class="btn" onclick="addToCart('Walk-in 1h', 900)">Přidat do košíku</button>
-                </div>
-
-                <div class="card">
-                    <h3>2 hodiny spánku</h3>
-                    <p>2 hodiny spánku odpovídají osmi hodinám spánku v normální posteli. Plnohodnotná regenerace těla i mysli.</p>
-                    <ul>
-                        <li>Plná regenerace</li>
-                        <li>Odpovídá 8 hodinám běžného spánku</li>
-                        <li>Krátká konzultace</li>
-                    </ul>
-                    <div class="price">1800 Kč</div>
-                    <button class="btn" onclick="addToCart('Walk-in 2h', 1800)">Přidat do košíku</button>
-                </div>
-            </div>
-
-            <div class="reviews">
-        <div class="reviews-container">
-            <!-- Card 1 -->
-            <div class="reviews-card">
-                <div class="reviews-header">
-                    <div class="reviews-user-icon">
-                        <img src="img/clients/antoniojuandemoreno.png">
-                    </div>
-                    <div class="reviews-content">
-                        <div class="reviews-title">Antonio Juan De Moreno</div>
-                        <div class="reviews-text">
-                            Skvělá zkušenost. Dvě hodiny spánku a cítím se, jako bych spal celou noc. Opravdu to funguje!
-                        </div>
-                    </div>
-                </div>
-                </div>
-                
-                <div class="reviews-card">
-                    <div class="reviews-header">
-                        <div class="reviews-user-icon">
-                            <img src="img/clients/matteobolognese.png">
-                        </div>
-                        <div class="reviews-content">
-                            <div class="reviews-title">Matteo Bolognese</div>
-                            <div class="reviews-text">
-                                Perfektní řešení pro vytížené lidi. Rychlá regenerace a spousta energie navíc.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="reviews-card">
-                    <div class="reviews-header">
-                        <div class="reviews-user-icon">
-                            <img src="img/clients/fabiomoreno.png">
-                        </div>
-                        <div class="reviews-content">
-                            <div class="reviews-title">Fabio Moreno</div>
-                            <div class="reviews-text">
-                                Byl jsem skeptický, ale efekt mě přesvědčil. Po proceduře jsem svěží a soustředěný.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="reviews-card">
-                    <div class="reviews-header">
-                        <div class="reviews-user-icon">
-                            <img src="img/clients/raulfrierro.png">
-                        </div>
-                        <div class="reviews-content">
-                            <div class="reviews-title">Raul Fierro</div>
-                            <div class="reviews-text">
-                                Výborný servis a znatelný rozdíl už po první návštěvě. Doporučuji.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="reviews-card">
-                    <div class="reviews-header">
-                        <div class="reviews-user-icon">
-                            <img src="img/clients/valeriavargas.png">
-                        </div>
-                        <div class="reviews-content">
-                            <div class="reviews-title">Valeria Vargas</div>
-                            <div class="reviews-text">
-                                Naprostá spokojenost. Po dvou hodinách jsem měla tolik energie, jako po celé noci spánku.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="reviews-card">
-                    <div class="reviews-header">
-                        <div class="reviews-user-icon">
-                            <img src="img/clients/enzodeluca.png">
-                        </div>
-                        <div class="reviews-content">
-                            <div class="reviews-title">Enzo De Luca</div>
-                            <div class="reviews-text">
-                                Super koncept i provedení. Odcházím odpočatý jako po osmi hodinách spánku.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                </div>
-                </div>
-        </div>
-
-        <!-- ABOUT PAGE -->
-        <div id="about-page" class="hidden">
-            <div class="about-section">
-                <h2>📋 Podmínky využití služeb</h2>
-                <ol>
-                    <li><strong>Úvodní ustanovení</strong><br>Tyto obchodní a provozní podmínky (dále jen „Podmínky“) upravují práva a povinnosti mezi společností CloneX (dále jen „Poskytovatel“) a zákazníky využívajícími služby spojené s elektromagneticky upraveným spánkem (dále jen „Služba“).</li>
-                    <li><strong>Charakter služeb</strong><br>Služba spočívá v podpoře spánku pomocí technologicky kontrolovaných elektromagnetických vln. Služba není zdravotnickou službou a nenahrazuje odbornou lékařskou péči. Zákazník bere na vědomí, že jakékoli účinky spojené s využitím Služby mohou být individuální a Poskytovatel nezaručuje konkrétní výsledek.</li>
-                    <li><strong>Věk zákazníka</strong><br>Službu mohou využívat pouze osoby starší 18 let. Osoby ve věku 15–18 let mohou využít Službu pouze za přítomnosti zákonného zástupce a s jeho písemným souhlasem. Osobám mladším 15 let není využití Služby povoleno.</li>
-                    <li><strong>Bezpečnost a odpovědnost</strong><br>Zákazník je povinen respektovat pokyny personálu Poskytovatele, dodržovat provozní řád a bezpečnostní pravidla. Poskytovatel nenese odpovědnost za jakékoli úrazy, újmy na zdraví nebo škody vzniklé v důsledku nedodržení pokynů personálu či porušení Podmínek ze strany zákazníka. Zákazník bere na vědomí, že služby jsou poskytovány na vlastní odpovědnost.</li>
-                    <li><strong>Zdravotní stav zákazníka</strong><br>Zákazník potvrzuje, že netrpí zdravotními potížemi, které by mohly negativně ovlivnit využití Služby (například neurologické poruchy, kardiostimulátory, epilepsie, těhotenství aj.). V případě pochybností je zákazník povinen poradit se s lékařem. Poskytovatel nenese odpovědnost za následky vyplývající z nepravdivých informací o zdravotním stavu.</li>
-                    <li><strong>Rezervace a platby</strong><br>Rezervace Služby se provádí prostřednictvím webu nebo na recepci. Ceny jsou uvedeny včetně DPH. Zrušení rezervace je možné nejpozději 24 hodin před jejím začátkem, jinak může být účtován storno poplatek.</li>
-                    <li><strong>Ochrana osobních údajů</strong><br>Poskytovatel zpracovává osobní údaje zákazníků pouze za účelem poskytování Služby v souladu s platnými právními předpisy. Více informací je uvedeno v dokumentu Zásady ochrany osobních údajů.</li>
-                    <li><strong>Zákaz nevhodného chování</strong><br>Zákazník nesmí využívat Službu pod vlivem alkoholu, omamných nebo psychotropních látek. Personál má právo odmítnout poskytnutí Služby při podezření na nevhodný stav zákazníka.</li>
-                    <li><strong>Reklamace a technické problémy</strong><br>V případě nespokojenosti či technického selhání může zákazník podat reklamaci bez zbytečného odkladu. Poskytovatel se zavazuje reklamaci vyřídit v přiměřené lhůtě.</li>
-                    <li><strong>Závěrečná ustanovení</strong><br>Poskytovatel si vyhrazuje právo kdykoli změnit tyto Podmínky. Aktuální znění je vždy dostupné na webových stránkách. Využitím Služby zákazník potvrzuje, že se s Podmínkami seznámil, rozumí jim a souhlasí s nimi.</li>
-                </ol>
-            </div>
-
-            <div class="about-section">
-                <h2>🩺 Průběh diagnózy</h2>
-                <p>Komplexní vyšetření spánku trvá přibližně 30-40 minut a skládá se ze tří částí:</p>
-                
-                <div class="diagnosis-steps">
-                    <div class="step">
-                        <h4>A – Úvodní rozhovor (10–15 min)</h4>
-                        <ul>
-                            <li>Stručné probrání potíží: problémy se spánkem, délka, kvalita, probouzení, chrápání, únava</li>
-                            <li>Základní informace o krevním tlaku, případné dřívější měření</li>
-                            <li>Prodělané nemoci, užívané léky, životní styl, stres, návyky před spaním</li>
+                <div class="pricing-grid">
+                    <div class="pricing-card reveal">
+                        <h3>Měsíční program</h3>
+                        <p>20 spánků po 2 hodiny v kapsli s úvodní konzultací na míru.</p>
+                        <div class="pricing-price">15 000 Kč</div>
+                        <ul class="pricing-features">
+                            <li>20 spánků</li>
+                            <li>2 hodiny spánku</li>
+                            <li>Hluboká regenerace</li>
+                            <li>Úvodní konzultace</li>
                         </ul>
+                        <button class="btn btn-card" onclick="addToCart('Měsíční plán (20 terapií)', 15000)">Přidat do
+                            košíku</button>
                     </div>
 
-                    <div class="step">
-                        <h4>B – Posouzení (10–15 min)</h4>
-                        <ul>
-                            <li>Orientační změření krevního tlaku</li>
-                            <li>Jednoduché otázky na možné symptomy spánkových poruch</li>
+                    <div class="pricing-card pricing-card--featured reveal">
+                        <div class="pricing-popular">Nejoblíbenější</div>
+                        <h3>Program na 3 měsíce</h3>
+                        <p>60 spánků po 2 hodiny pro hlubokou regeneraci na míru.</p>
+                        <div class="pricing-price">40 000 Kč</div>
+                        <ul class="pricing-features">
+                            <li>60 spánků</li>
+                            <li>2 hodiny spánku</li>
+                            <li>Individuální regenerace</li>
+                            <li>Úvodní konzultace</li>
                         </ul>
+                        <button class="btn btn-card" onclick="addToCart('3měsíční plán (60 terapií)', 40000)">Přidat do
+                            košíku</button>
                     </div>
 
-                    <div class="step">
-                        <h4>C – Vyhodnocení (10 min)</h4>
-                        <ul>
-                            <li>Shrnutí zjištění</li>
+                    <div class="pricing-card reveal">
+                        <h3>6měsíční program</h3>
+                        <p>120 spánků po 2 hodiny pro maximální regeneraci na míru.</p>
+                        <div class="pricing-price">75 000 Kč</div>
+                        <ul class="pricing-features">
+                            <li>120 spánků</li>
+                            <li>2 hodiny spánku</li>
+                            <li>Maximální regenerace</li>
+                            <li>Úvodní konzultace</li>
                         </ul>
-                    </div>
-
-                    <div class="step">
-                        <h4>D – Doporučení dalšího postupu</h4>
-                        <ul>
-                            <li>Doporučení, zda je vhodné další odborné vyšetření</li>
-                        </ul>
+                        <button class="btn btn-card" onclick="addToCart('6měsíční plán (120 terapií)', 75000)">Přidat do
+                            košíku</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- RECEIPT PAGE -->
-        <div id="receipt-page" class="hidden">
-            <div class="receipt-container">
-                <div class="receipt-header">
-                    <h2>🛒 Váš košík</h2>
-                    <p>Objednávka #<span id="order-id">00000</span></p>
-                    <p>Datum: <span id="order-date">--</span></p>
+        <!-- Walk-in -->
+        <section class="section" id="walkin">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-label">⚡ Walk-in</div>
+                    <h2 class="section-title">Jednorázové sezení</h2>
+                    <p class="section-desc">Přijďte kdykoli a odejděte odpočatí.</p>
                 </div>
 
-                <div class="receipt-items">
-                    <h3 style="margin-bottom: 1rem; color: #1e3c72;">Položky:</h3>
-                    <ul id="cart-items">
-                        <li style="text-align: center; color: #94a3b8;">Košík je prázdný</li>
-                    </ul>
-                </div>
-
-                <div class="receipt-totals">
-                    <div class="total-row">
-                        <span>Mezisoučet:</span>
-                        <span id="subtotal">0 Kč</span>
+                <div class="pricing-grid" style="max-width: 700px; margin: 0 auto;">
+                    <div class="pricing-card reveal">
+                        <h3>1 hodina spánku</h3>
+                        <p>Odpovídá čtyřem hodinám běžného spánku.</p>
+                        <div class="pricing-price">900 Kč</div>
+                        <ul class="pricing-features">
+                            <li>Rychlá regenerace</li>
+                            <li>Odpovídá 4h běžného spánku</li>
+                            <li>Krátká konzultace</li>
+                        </ul>
+                        <button class="btn btn-card" onclick="addToCart('Walk-in 1h', 900)">Přidat do košíku</button>
                     </div>
-                    <div class="total-row final">
-                        <span>Celkem:</span>
-                        <span id="total">0 Kč</span>
+
+                    <div class="pricing-card reveal">
+                        <h3>2 hodiny spánku</h3>
+                        <p>Plnohodnotná regenerace těla i mysli.</p>
+                        <div class="pricing-price">1 800 Kč</div>
+                        <ul class="pricing-features">
+                            <li>Plná regenerace</li>
+                            <li>Odpovídá 8h běžného spánku</li>
+                            <li>Krátká konzultace</li>
+                        </ul>
+                        <button class="btn btn-card" onclick="addToCart('Walk-in 2h', 1800)">Přidat do košíku</button>
                     </div>
-                </div>
-
-                <button class="btn" id="reset-cart">Vyprázdnit košík</button>
-                <button class="btn" id="checkout-btn">Koupit</button>
-            </div>
-        </div>
-
-        <!-- THANK YOU PAGE -->
-        <div id="thankyou-page" class="hidden">
-            <div class="receipt-container">
-                <div class="receipt-header">
-                    <h2>Děkujeme za váš nákup!</h2>
-                    <p>Vaše objednávka byla úspěšně zpracována.</p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section section--gray">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-label">❤️ Recenze</div>
+                    <h2 class="section-title">Co říkají naši klienti</h2>
+                </div>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            „Skvělá zkušenost. Dvě hodiny spánku a cítím se, jako bych spal celou noc. Opravdu to
+                            funguje!"
+                        </p>
+                        <div class="testimonial-author">
+                            <img class="testimonial-avatar" src="img/clients/antoniojuandemoreno.png" alt="">
+                            <div>
+                                <div class="testimonial-name">Antonio Juan De Moreno</div>
+                                <div class="testimonial-role">Klient</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            „Perfektní řešení pro vytížené lidi. Rychlá regenerace a spousta energie navíc."
+                        </p>
+                        <div class="testimonial-author">
+                            <img class="testimonial-avatar" src="img/clients/matteobolognese.png" alt="">
+                            <div>
+                                <div class="testimonial-name">Matteo Bolognese</div>
+                                <div class="testimonial-role">Klient</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            „Byl jsem skeptický, ale efekt mě přesvědčil. Po proceduře jsem svěží a soustředěný."
+                        </p>
+                        <div class="testimonial-author">
+                            <img class="testimonial-avatar" src="img/clients/fabiomoreno.png" alt="">
+                            <div>
+                                <div class="testimonial-name">Fabio Moreno</div>
+                                <div class="testimonial-role">Klient</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            „Výborný servis a znatelný rozdíl už po první návštěvě. Doporučuji."
+                        </p>
+                        <div class="testimonial-author">
+                            <img class="testimonial-avatar" src="img/clients/raulfrierro.png" alt="">
+                            <div>
+                                <div class="testimonial-name">Raul Fierro</div>
+                                <div class="testimonial-role">Klient</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            „Naprostá spokojenost. Po dvou hodinách jsem měla tolik energie, jako po celé noci spánku."
+                        </p>
+                        <div class="testimonial-author">
+                            <img class="testimonial-avatar" src="img/clients/valeriavargas.png" alt="">
+                            <div>
+                                <div class="testimonial-name">Valeria Vargas</div>
+                                <div class="testimonial-role">Klient</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">
+                            „Super koncept i provedení. Odcházím odpočatý jako po osmi hodinách spánku."
+                        </p>
+                        <div class="testimonial-author">
+                            <img class="testimonial-avatar" src="img/clients/enzodeluca.png" alt="">
+                            <div>
+                                <div class="testimonial-name">Enzo De Luca</div>
+                                <div class="testimonial-role">Klient</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <footer>
-        <div class="footer">
-            <div class="contact">
-                <p>Email: <a href="mailto:clonex.sro@gmail.com">clonex.sro@gmail.com</a></p>
-                <p>Telefon: <a href="tel:+420585288257">+420 585 288 257</a></p>
-                <p>Adresa: Pasteurova 935/8a, 722 00 Olomouc</p>
+    <!-- ═══ ABOUT PAGE ═══ -->
+    <div id="about-page" class="hidden">
+        <div style="height: 72px;"></div>
+        <section class="section">
+            <div class="section-inner">
+                <div class="about-card">
+                    <h2>📋 Podmínky využití služeb</h2>
+                    <ol>
+                        <li><strong>Úvodní ustanovení</strong><br>Tyto obchodní a provozní podmínky (dále jen
+                            „Podmínky") upravují práva a povinnosti mezi společností CloneX (dále jen „Poskytovatel") a
+                            zákazníky využívajícími služby spojené s elektromagneticky upraveným spánkem (dále jen
+                            „Služba").</li>
+                        <li><strong>Charakter služeb</strong><br>Služba spočívá v podpoře spánku pomocí technologicky
+                            kontrolovaných elektromagnetických vln. Služba není zdravotnickou službou a nenahrazuje
+                            odbornou lékařskou péči. Zákazník bere na vědomí, že jakékoli účinky spojené s využitím
+                            Služby mohou být individuální a Poskytovatel nezaručuje konkrétní výsledek.</li>
+                        <li><strong>Věk zákazníka</strong><br>Službu mohou využívat pouze osoby starší 18 let. Osoby ve
+                            věku 15–18 let mohou využít Službu pouze za přítomnosti zákonného zástupce a s jeho písemným
+                            souhlasem. Osobám mladším 15 let není využití Služby povoleno.</li>
+                        <li><strong>Bezpečnost a odpovědnost</strong><br>Zákazník je povinen respektovat pokyny
+                            personálu Poskytovatele, dodržovat provozní řád a bezpečnostní pravidla. Poskytovatel nenese
+                            odpovědnost za jakékoli úrazy, újmy na zdraví nebo škody vzniklé v důsledku nedodržení
+                            pokynů personálu či porušení Podmínek ze strany zákazníka.</li>
+                        <li><strong>Zdravotní stav zákazníka</strong><br>Zákazník potvrzuje, že netrpí zdravotními
+                            potížemi, které by mohly negativně ovlivnit využití Služby (například neurologické poruchy,
+                            kardiostimulátory, epilepsie, těhotenství aj.).</li>
+                        <li><strong>Rezervace a platby</strong><br>Rezervace Služby se provádí prostřednictvím webu nebo
+                            na recepci. Ceny jsou uvedeny včetně DPH. Zrušení rezervace je možné nejpozději 24 hodin
+                            před jejím začátkem.</li>
+                        <li><strong>Ochrana osobních údajů</strong><br>Poskytovatel zpracovává osobní údaje zákazníků
+                            pouze za účelem poskytování Služby v souladu s platnými právními předpisy.</li>
+                        <li><strong>Zákaz nevhodného chování</strong><br>Zákazník nesmí využívat Službu pod vlivem
+                            alkoholu, omamných nebo psychotropních látek. Personál má právo odmítnout poskytnutí Služby.
+                        </li>
+                        <li><strong>Reklamace a technické problémy</strong><br>V případě nespokojenosti či technického
+                            selhání může zákazník podat reklamaci bez zbytečného odkladu.</li>
+                        <li><strong>Závěrečná ustanovení</strong><br>Poskytovatel si vyhrazuje právo kdykoli změnit tyto
+                            Podmínky. Aktuální znění je vždy dostupné na webových stránkách.</li>
+                    </ol>
+                </div>
+
+                <div class="about-card">
+                    <h2>🩺 Průběh diagnózy</h2>
+                    <p>Komplexní vyšetření spánku trvá přibližně 30–40 minut a skládá se ze čtyř částí:</p>
+
+                    <div class="diagnosis-grid">
+                        <div class="diagnosis-step">
+                            <h4>A – Úvodní rozhovor (10–15 min)</h4>
+                            <ul>
+                                <li>Stručné probrání potíží: problémy se spánkem, délka, kvalita, probouzení, chrápání,
+                                    únava</li>
+                                <li>Základní informace o krevním tlaku, případné dřívější měření</li>
+                                <li>Prodělané nemoci, užívané léky, životní styl, stres, návyky před spaním</li>
+                            </ul>
+                        </div>
+
+                        <div class="diagnosis-step">
+                            <h4>B – Posouzení (10–15 min)</h4>
+                            <ul>
+                                <li>Orientační změření krevního tlaku</li>
+                                <li>Jednoduché otázky na možné symptomy spánkových poruch</li>
+                            </ul>
+                        </div>
+
+                        <div class="diagnosis-step">
+                            <h4>C – Vyhodnocení (10 min)</h4>
+                            <ul>
+                                <li>Shrnutí zjištění</li>
+                            </ul>
+                        </div>
+
+                        <div class="diagnosis-step">
+                            <h4>D – Doporučení dalšího postupu</h4>
+                            <ul>
+                                <li>Doporučení, zda je vhodné další odborné vyšetření</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="social">
-                <a href="https://www.instagram.com/clonex.sro">Instagram</a>
-                <a href="https://x.com/clonex.sro">Twitter</a>
-                <a href="https://www.tiktok.com/@clonex.sro">TikTok</a>
+        </section>
+    </div>
+
+    <!-- ═══ RECEIPT PAGE ═══ -->
+    <div id="receipt-page" class="hidden">
+        <div style="height: 72px;"></div>
+        <section class="section">
+            <div class="section-inner">
+                <div class="cart-container">
+                    <div class="cart-header">
+                        <h2>Váš košík</h2>
+                        <p>Objednávka #<span id="order-id">00000</span> · <span id="order-date">--</span></p>
+                    </div>
+                    <div class="cart-body">
+                        <h3>Položky</h3>
+                        <ul class="cart-items" id="cart-items">
+                            <li class="cart-empty">Košík je prázdný</li>
+                        </ul>
+                    </div>
+                    <div class="cart-footer">
+                        <div class="cart-total-row">
+                            <span>Mezisoučet</span>
+                            <span id="subtotal">0 Kč</span>
+                        </div>
+                        <div class="cart-total-row cart-total-row--final">
+                            <span>Celkem</span>
+                            <span id="total">0 Kč</span>
+                        </div>
+                        <div class="cart-actions">
+                            <button class="btn btn-ghost" id="reset-cart">Vyprázdnit</button>
+                            <button class="btn btn-primary" id="checkout-btn">Koupit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ═══ THANK YOU PAGE ═══ -->
+    <div id="thankyou-page" class="hidden">
+        <div style="height: 72px;"></div>
+        <section class="section">
+            <div class="section-inner">
+                <div class="thankyou-container">
+                    <div class="thankyou-icon">✓</div>
+                    <h2>Děkujeme za nákup!</h2>
+                    <p>Vaše objednávka byla úspěšně zpracována. Brzy se vám ozveme s potvrzením.</p>
+                    <button class="btn btn-primary" onclick="showPage('home')">Zpět na hlavní stránku</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="nav-logo-text" style="font-size: 1.15rem;">CloneX</span>
+                <p>Spánková kapsle optimalizovaná vědou. Lepší spánek, lepší život.</p>
+            </div>
+            <div>
+                <div class="footer-heading">Kontakt</div>
+                <div class="footer-links">
+                    <a href="mailto:clonex.sro@gmail.com">clonex.sro@gmail.com</a>
+                    <a href="tel:+420585288257">+420 585 288 257</a>
+                    <span style="font-size: 0.9rem;">Pasteurova 935/8a, Olomouc</span>
+                </div>
+            </div>
+            <div>
+                <div class="footer-heading">Sociální sítě</div>
+                <div class="footer-links">
+                    <a href="https://www.instagram.com/clonex.sro">Instagram</a>
+                    <a href="https://x.com/clonex.sro">Twitter</a>
+                    <a href="https://www.tiktok.com/@clonex.sro">TikTok</a>
+                </div>
             </div>
         </div>
+        <div class="footer-bottom">© 2026 CloneX s.r.o. Všechna práva vyhrazena.</div>
     </footer>
 
-    <script>
-        let cart = [];
-
-        function showPage(page) {
-            document.getElementById('home-page').classList.add('hidden');
-            document.getElementById('about-page').classList.add('hidden');
-            document.getElementById('receipt-page').classList.add('hidden');
-            document.getElementById('thankyou-page').classList.add('hidden');
-            document.getElementById(page + '-page').classList.remove('hidden');
-            
-            if (page === 'receipt') {
-                updateCartDisplay();
-            }
-        }
-
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            updateCartCount();
-            
-            // Show notification
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = '✓ Přidáno!';
-            btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-            
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            }, 1500);
-        }
-
-        function updateCartCount() {
-            document.getElementById('cart-count').textContent = cart.length;
-        }
-
-        function updateCartDisplay() {
-            const cartItemsContainer = document.getElementById('cart-items');
-            const subtotalElement = document.getElementById('subtotal');
-            const totalElement = document.getElementById('total');
-            const orderIdElement = document.getElementById('order-id');
-            const dateElement = document.getElementById('order-date');
-            const checkoutBtn = document.getElementById('checkout-btn');
-
-            cartItemsContainer.innerHTML = '';
-            let subtotal = 0;
-
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<li style="text-align: center; color: #94a3b8;">Košík je prázdný</li>';
-                if (checkoutBtn) checkoutBtn.style.display = 'none';
-            } else {
-                cart.forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = `${item.name} - ${item.price.toLocaleString('cs-CZ')} Kč`;
-                    cartItemsContainer.appendChild(li);
-                    subtotal += item.price;
-                });
-                if (checkoutBtn) checkoutBtn.style.display = 'block';
-            }
-
-            subtotalElement.textContent = `${subtotal.toLocaleString('cs-CZ')} Kč`;
-            totalElement.textContent = `${subtotal.toLocaleString('cs-CZ')} Kč`;
-
-            // Update order details
-            orderIdElement.textContent = Math.floor(Math.random() * 100000);
-            dateElement.textContent = new Date().toLocaleDateString('cs-CZ');
-        }
-
-        function resetCart() {
-            cart = [];
-            updateCartCount();
-            updateCartDisplay();
-        }
-
-        function checkout() {
-            showPage('thankyou');
-            resetCart();
-        }
-
-        document.getElementById('reset-cart').addEventListener('click', resetCart);
-        document.getElementById('checkout-btn').addEventListener('click', checkout);
-
-        // Initialize
-        updateCartCount();
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
