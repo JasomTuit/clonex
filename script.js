@@ -1,8 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // ═══════════════════════════════════════════
-    // Cart State
-    // ═══════════════════════════════════════════
     let cart = JSON.parse(localStorage.getItem('clonex-cart')) || [];
 
     const $id = id => document.getElementById(id);
@@ -17,16 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const navbar = $id('navbar');
     const themeToggle = $id('theme-toggle');
 
-    // ═══════════════════════════════════════════
-    // Theme Toggle
-    // ═══════════════════════════════════════════
     function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         if (themeToggle) themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
         localStorage.setItem('clonex-theme', theme);
     }
 
-    // Default = dark. Only go light if explicitly saved.
     const savedTheme = localStorage.getItem('clonex-theme') || 'dark';
     applyTheme(savedTheme);
 
@@ -37,9 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ═══════════════════════════════════════════
-    // Navbar scroll behavior
-    // ═══════════════════════════════════════════
     function handleScroll() {
         if (!navbar) return;
         const scrolled = window.scrollY > 60;
@@ -49,9 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    // ═══════════════════════════════════════════
-    // Scroll Reveal
-    // ═══════════════════════════════════════════
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -67,9 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // ═══════════════════════════════════════════
-    // Page Navigation
-    // ═══════════════════════════════════════════
     window.showPage = function (page) {
         const pages = ['home-page', 'about-page', 'receipt-page', 'thankyou-page'];
         pages.forEach(p => {
@@ -84,24 +68,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        // Re-observe new reveals that may have become visible
         document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
             revealObserver.observe(el);
         });
 
-        // Reset navbar state
         handleScroll();
     };
 
-    // ═══════════════════════════════════════════
-    // Cart Functions
-    // ═══════════════════════════════════════════
     window.addToCart = function (name, price) {
         cart.push({ name, price });
         saveCart();
         updateCartCount();
 
-        // Button feedback
         const btn = event.target;
         const originalText = btn.textContent;
         btn.textContent = '✓ Přidáno!';
@@ -112,10 +90,8 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.classList.remove('btn-success-state');
         }, 1400);
 
-        // Toast
         showToast(name + ' přidáno do košíku');
 
-        // Cart badge bump
         if (cartCountEl) {
             cartCountEl.classList.remove('bump');
             void cartCountEl.offsetWidth;
@@ -194,9 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCartCount();
     }
 
-    // ═══════════════════════════════════════════
-    // Toast
-    // ═══════════════════════════════════════════
     function showToast(message) {
         const existing = document.querySelector('.toast');
         if (existing) existing.remove();
@@ -216,12 +189,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 2500);
     }
 
-    // ═══════════════════════════════════════════
-    // Event Listeners
-    // ═══════════════════════════════════════════
     if (resetBtn) resetBtn.addEventListener('click', resetCart);
     if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
 
-    // Initialize
     updateCartCount();
 });
